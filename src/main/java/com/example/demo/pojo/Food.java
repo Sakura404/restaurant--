@@ -3,12 +3,12 @@ package com.example.demo.pojo;
 public class Food {
 	private int id;
 	private String name;
-	private int cost;
+	private long cost;
 
-	public Food(int i, String n, int c) {
+	public Food(int i, String n, long cost2) {
 		this.id = i;
 		this.name = n;
-		this.cost = c;
+		this.cost = cost2;
 	}
 
 	public int getId() {
@@ -27,7 +27,7 @@ public class Food {
 		this.name = name;
 	}
 
-	public int getCost() {
+	public long getCost() {
 		return cost;
 	}
 
