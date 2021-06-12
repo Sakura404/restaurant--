@@ -113,7 +113,7 @@ public class DemoController {
 
 	@RequestMapping(value = "ordersubmit")
 	@ResponseBody
-	public Object orders(@RequestBody Orderitem[] order) {
+	public Object ordersubmit(@RequestBody Orderitem[] order) {
 		final String sql = "insert into orders(time) values(NOW())";
 		try {
 			GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -141,6 +141,14 @@ public class DemoController {
 	@ResponseBody
 	public Object soleget(){
 		final String sql="SELECT id ,`name` ,COALESCE(SUM(quantity),0) AS sales from food LEFT JOIN orderitem ON foodid=id GROUP BY `name`,id ";
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+		return list;
+	}
+	
+	@RequestMapping(value="ordersget")
+	@ResponseBody
+	public Object ordersget() {
+		final String sql ="select orders.id,orders.time,itemid,name,cost,quantity from orders JOIN orderitem on orders.id=orderitem.orderid left join food on food.id=orderitem.foodid";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}
